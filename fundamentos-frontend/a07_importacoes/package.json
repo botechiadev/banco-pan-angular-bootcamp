@@ -1,0 +1,19 @@
+{
+    "name": "a07_importacoes",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./main.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon ./main.js",
+        "guiado1": "nodemon ./exercicio_guiado01.js",
+        "refactor1": "nodemon ./refactor_guiado01.js"
+    },
+    "keywords": [],
+    "author": "botechiadev <botechiadev@gmail.com>s",
+    "license": "MIT",
+    "devDependencies": {
+        "nodemon": "^3.0.2"
+    }
+}
