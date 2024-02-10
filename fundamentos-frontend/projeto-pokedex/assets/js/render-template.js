@@ -1,19 +1,51 @@
 function renderPokemon(detailedPokemons) {
-  const { id, name, types, sprites } = detailedPokemons;
+  console.log(detailedPokemons)
+  const { id, name, types, sprites, moves } = detailedPokemons;
   return `
     <li class="pokemon ${types[0].type.name}" id="pokemon-${id}">
       <span class="number">#${String(id).padStart(3, '0')}</span>
       <span class="name">${name}</span>
       <div class="detail">
-        <ol class="types">
-          <li class="type ${types[0].type.name + '1'}">${types[0].type.name}</li>
-          <li class="type ${types[1] ? types[1].type.name + '1' : ''}">${types[1] ? types[1].type.name : ''}</li>
-        </ol>
+        <div class="detail-box1">
+          <button onclick="myFunction(${id})">Details</button> 
+          <ol class="types">
+            <li class="type ${types[0].type.name + '1'}">${types[0].type.name}</li>
+            <li class="type ${types[1] ? types[1].type.name + '1' : ''}">${types[1] ? types[1].type.name : ''}</li>
+          </ol>
+        </div>  
         <img src="${sprites.other['dream_world']['front_default']}" alt="img do pokemon ${name}">
       </div>
-    </li>
+      <div class="modalBox" id="modal-${id}">
+      <button onclick="myFunction(${id})">x</button> 
+      <div>
+      <h2>${name}</h2>
+      <div class="movesBox">
+      <h3>Pokemon Moves</h3>
+        <ul>
+          ${moves.map(move => `<li>${move.move.name}</li>`).join('')}
+        </ul>
+      </div>
+      <div>
+        <img src="${sprites.versions['generation-v']['black-white'].animated['front_default']}" alt="img animada"/>
+      </div>
+    </div>
+  </div>
+</li>
+
   `;
 }
+
+// Função para mostrar ou ocultar o modal
+function myFunction(id) {
+  const modalId = `modal-${id}`;
+  const modal = document.getElementById(modalId);
+  if (modal.style.display === "none" || !modal.style.display) {
+    modal.style.display = "block";
+  } else {
+    modal.style.display = "none";
+  }
+}
+
 // Chamada para buscar os Pokémon, renderizar a página inicial e configurar a paginação
 pokeApi.getPokemons(0, 12).then((pokemonsList) => {
   const listaHTML = document.getElementById('pokemonsHTML');
